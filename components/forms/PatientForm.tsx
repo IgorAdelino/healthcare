@@ -8,7 +8,8 @@ import CustomFormField from '../CustomFormField'
 import SubmitButton from '../SubmitButton'
 import { useState } from 'react'
 import { UserFormValidation } from '@/lib/validation'
-import { useRouter } from 'next/router'
+import { createUser } from '@/lib/actions/patient.actions'
+import { useRouter } from 'next/navigation'
 
 export enum FormFieldType {
   INPUT = 'input',
@@ -46,9 +47,9 @@ const PatientForm = () => {
         phone,
       }
 
-      const user = await createUser(userData)
+      const newUser = await createUser(userData)
 
-      if (user) router.push(`/patients/${user.$id}/register`)
+      if (newUser) router.push(`/patients/${newUser.$id}/register`)
     } catch (error) {
       console.log(error)
     }
